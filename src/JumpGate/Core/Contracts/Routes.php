@@ -1,6 +1,6 @@
 <?php
 
-namespace NukaCode\Core\Contracts;
+namespace JumpGate\Core\Contracts;
 
 use Illuminate\Routing\Router;
 

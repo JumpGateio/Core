@@ -1,5 +1,5 @@
 {
-    "name":        "nukacode/core",
+    "name":        "jumpgate/core",
     "description": "A core set of features for laravel sites.",
     "license":     "MIT",
     "authors":     [
@@ -13,31 +13,38 @@
         }
     ],
     "require": {
-        "laravel/framework": "^5.1",
-        "nukacode/database": "^1.0",
-        "laracasts/utilities": "~2.0",
-        "doctrine/dbal": "2.4.2",
-        "laracasts/presenter": "0.2.0"
+        "laravel/framework": "^5.0",
+        "jumpgate/database": "*@dev",
+        "laracasts/utilities": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1",
-        "henrikbjorn/phpspec-code-coverage": "~0.2",
-        "benconstable/phpspec-laravel": "~2.0"
+        "phpunit/phpunit": "~5.7",
+        "orchestra/testbench": "~3.4"
     },
     "suggest": {
-        "nukacode/menu": "Full featured menu system.",
-        "nukacode/users": "A user solution."
+        "jumpgate/menu": "Full featured menu system.",
+        "jumpgate/database": "Database helpers and collection additions.",
+        "jumpgate/view-resolution": "Automatic view resolution.",
+        "jumpgate/users": "A complete user solution."
     },
     "autoload":    {
         "files": [
-            "src/helpers.php"
+            "src/helper/base.php",
+            "src/helper/math.php",
+            "src/helper/route.php",
+            "src/helper/time.php"
         ],
         "psr-4":    {
-            "NukaCode\\Core\\": "src/NukaCode/Core"
+            "JumpGate\\Core\\": "src/JumpGate/Core"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../Database"
+        }
+    ]
 }

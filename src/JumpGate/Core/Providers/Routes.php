@@ -1,6 +1,6 @@
 <?php
 
-namespace NukaCode\Core\Providers;
+namespace JumpGate\Core\Providers;
 
 abstract class Routes
 {
@@ -15,7 +15,7 @@ abstract class Routes
      * @param string $name
      * @param string $uri
      *
-     * @return \NukaCode\Core\Providers\Routes
+     * @return \JumpGate\Core\Providers\Routes
      */
     public function setContext($name, $uri)
     {
