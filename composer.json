@@ -1,21 +1,22 @@
 {
-    "name":        "jumpgate/core",
+    "name": "jumpgate/core",
     "description": "A core set of features for laravel sites.",
-    "license":     "MIT",
-    "authors":     [
+    "license": "MIT",
+    "authors": [
         {
-            "name":  "Stygian",
+            "name": "Stygian",
             "email": "stygian.warlock.v2@gmail.com"
         },
         {
-            "name":  "Riddles",
+            "name": "Riddles",
             "email": "riddles@dev-toolbox.com"
         }
     ],
     "require": {
         "laravel/framework": "^5.0",
         "jumpgate/database": "*@dev",
-        "laracasts/utilities": "~2.0"
+        "laracasts/utilities": "~2.0",
+        "camroncade/timezone": "^0.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -29,14 +30,15 @@
         "jumpgate/view-resolution": "Automatic view resolution.",
         "jumpgate/users": "A complete user solution."
     },
-    "autoload":    {
+    "autoload": {
         "files": [
-            "src/helper/base.php",
-            "src/helper/math.php",
-            "src/helper/route.php",
-            "src/helper/time.php"
+            "src/helpers/base.php",
+            "src/helpers/math.php",
+            "src/helpers/route.php",
+            "src/helpers/strings.php",
+            "src/helpers/time.php"
         ],
-        "psr-4":    {
+        "psr-4": {
             "JumpGate\\Core\\": "src/JumpGate/Core"
         }
     },

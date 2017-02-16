@@ -1,8 +1,8 @@
 <?php
 
-use NukaCode\Database\Collection;
+use JumpGate\Database\Collections\EloquentCollection;
 
-if (! function_exists('start_Debug')) {
+if (! function_exists('start_debug')) {
     /**
      * Start a debugbar measurement
      *
@@ -13,7 +13,7 @@ if (! function_exists('start_Debug')) {
      */
     function start_debug($name, $label)
     {
-        if (app()->environment('local') || Input::get('debug') == true) {
+        if (app()->environment('local') && app()->bound('debugbar')) {
             start_measure($name, $label);
         }
     }
@@ -29,7 +29,7 @@ if (! function_exists('stop_debug')) {
      */
     function stop_debug($name)
     {
-        if (app()->environment('local') || Input::get('debug') == true) {
+        if (app()->environment('local') && app()->bound('debugbar')) {
             stop_measure($name);
         }
     }
@@ -41,35 +41,11 @@ if (! function_exists('collector')) {
      *
      * @param  mixed $value
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     function collector($value = null)
     {
-        return new Collection($value);
-    }
-}
-
-if (! function_exists('cache')) {
-    /**
-     * Get / set the specified cache value.
-     *
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  int    $minutes
-     *
-     * @return mixed
-     */
-    function cache($key = null, $value = null, $minutes = null)
-    {
-        if (is_null($key)) {
-            return app('cache');
-        }
-
-        if (! is_null($value) && ! is_null($minutes)) {
-            return app('cache')->put($key, $value, $minutes);
-        }
-
-        return app('cache')->get($key);
+        return new EloquentCollection($value);
     }
 }
 
@@ -112,41 +88,5 @@ if (! function_exists('ppd')) {
 
         echo $output;
         die;
-    }
-}
-
-if (! function_exists('classify')) {
-    /**
-     * Converts a string into a class name.
-     * Hello world would become Hello_World.
-     *
-     * @param $value
-     *
-     * @return mixed
-     */
-    function classify($value)
-    {
-        $value  = mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
-        $search = ['_', '-', '.', '/', ':'];
-
-        return str_replace(' ', '_', str_replace($search, ' ', $value));
-    }
-}
-
-if (! function_exists('humanReadableImplode')) {
-    /**
-     * Implode an array but add 'and' before the last result.
-     *
-     * @param $array
-     *
-     * @return string
-     */
-    function humanReadableImplode($array, $separator = 'and')
-    {
-        $last  = array_slice($array, -1);
-        $first = implode(', ', array_slice($array, 0, -1));
-        $both  = array_filter(array_merge([$first], $last));
-
-        return implode(" $separator ", $both);
     }
 }

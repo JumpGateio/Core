@@ -1,5 +1,32 @@
 <?php
 
+if (! function_exists('setTime')) {
+    function setTime($time)
+    {
+        if (auth()->check()) {
+            $timezone = is_null(auth()->user()->timezone) ? config('app.default_user_timezone') : auth()->user()->timezone;
+
+            return \Camroncade\Timezone\Facades\Timezone::convertToUTC($time, $timezone);
+        }
+
+        return $time;
+    }
+}
+
+if (! function_exists('getTime')) {
+    function getTime($time)
+    {
+        $timeZone = null;
+
+        if (auth()->check()) {
+            $timeZone = auth()->user()->timezone;
+            $time     = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timeZone);
+        }
+
+        return \Carbon\Carbon::parse($time, $timeZone);
+    }
+}
+
 if (! function_exists('carbonParse')) {
     function carbonParse($date)
     {
