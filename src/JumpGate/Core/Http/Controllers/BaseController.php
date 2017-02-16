@@ -13,14 +13,22 @@ abstract class BaseController extends Controller
     ];
 
     /**
+     * Set the page title for use in the header.
+     *
+     * @param string $customPageTitle
+     */
+    protected function setPageTitle($customPageTitle)
+    {
+        $this->setViewData(compact('customPageTitle'));
+    }
+
+    /**
      * Pass data to the view.
      *
      * @param mixed $key
      * @param mixed $value
-     *
-     * @return $this
      */
-    public function setViewData($key, $value = null)
+    protected function setViewData($key, $value = null)
     {
         if (is_array($key)) {
             foreach ($key as $name => $data) {
@@ -38,8 +46,6 @@ abstract class BaseController extends Controller
      *
      * @param mixed $key
      * @param mixed $value
-     *
-     * @return $this
      */
     protected function setJavascriptData($key, $value = null)
     {
