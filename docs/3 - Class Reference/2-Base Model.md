@@ -1,20 +1,14 @@
 # BaseModel
 
 ## Introduction
-The NukCode BaseModel class adds a lot of extra functionality to help with common tasks.  To use it you should have 
-your `Model` class (the one all of your other models extend) extend `NukaCode\Core\Models\BaseModel`.
+The JumpGate BaseModel class adds a lot of extra functionality to help with common tasks.  To use it you should have 
+your `Model` class (the one all of your other models extend) extend `JumpGate\Core\Models\BaseModel`.
 
 ## The Collection
-All NukaCode models use [NukaCode\Database\Collection]() for their default collection.  You can read more about them
+All JumpGate models use [JumpGate\Database\Collection]() for their default collection.  You can read more about them
 [here]().
 
-> If you want to opt out of this, set `$nukaCollections` to `false` on your models.
-
-## Presenters
-Core uses `laracasts\presenter` to handle the Presenter set up for a model.  To use it, set your model's
-`$presenter` property to the full class name (Including namespace) of the presenter.
-
-`protected $presenter = \App\Presenters\ModelPresenter::class;`
+> If you want to opt out of this, set `$jumpGateCollections` to `false` on your models.
 
 ## Observers
 To set up Observers, set the `$observer` property on your model.  Like presenters, this should be the full

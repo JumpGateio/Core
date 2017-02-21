@@ -42,7 +42,7 @@
             "JumpGate\\Core\\": "src/JumpGate/Core"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "repositories": [
         {
             "type": "path",
