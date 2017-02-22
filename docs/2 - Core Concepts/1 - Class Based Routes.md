@@ -15,6 +15,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use JumpGate\Core\Contracts\Routes;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var array
      */
     protected $providers = [
-        // \App\Http\Routes\Home::class,
+        \App\Http\Routes\Home::class,
     ];
 
     public function __construct($app)
@@ -54,10 +55,15 @@ class RouteServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
 
-        foreach ($this->providers as $provider) {
+        foreach ($this->providers as $key => $provider) {
             $provider = new $provider;
 
-            $router->patterns($provider->patterns());
+            if (! $provider instanceof Routes) {
+                unset($this->providers[$key]);
+                continue;
+            }
+
+            $router->patterns($provider->getPatterns());
         }
 
         parent::boot();
@@ -117,9 +123,9 @@ class RouteServiceProvider extends ServiceProvider
             $provider = new $provider;
 
             $router->group([
-                'prefix'     => $provider->prefix(),
-                'namespace'  => $provider->namespacing(),
-                'middleware' => $provider->middleware(),
+                'prefix'     => $provider->getPrefix(),
+                'namespace'  => $provider->getNamespace(),
+                'middleware' => $provider->getMiddleware(),
             ], function ($router) use ($provider) {
                 $provider->routes($router);
             });
@@ -172,30 +178,14 @@ So how does this provider help us?  Let's first look at an example route class.
 namespace App\Http\Routes;
 
 use JumpGate\Core\Contracts\Routes;
-use JumpGate\Core\Providers\Routes as BaseRoutes;
+use JumpGate\Core\Http\Routes\BaseRoute;
 use Illuminate\Routing\Router;
 
-class Home extends BaseRoutes implements Routes
+class Home extends BaseRoute implements Routes
 {
-    public function namespacing()
-    {
-        return 'App\Http\Controllers';
-    }
+    public $namespace = 'App\Http\Controllers';
 
-    public function prefix()
-    {
-        return null;
-    }
-
-    public function middleware()
-    {
-        return ['web'];
-    }
-
-    public function patterns()
-    {
-        return [];
-    }
+    public $middleware = ['web'];
 
     public function routes(Router $router)
     {
