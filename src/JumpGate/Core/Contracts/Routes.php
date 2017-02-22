@@ -10,13 +10,13 @@ interface Routes
 
     public function getContext($name);
 
-    public function namespacing();
+    public function getNamespace();
 
-    public function prefix();
+    public function getPrefix();
 
-    public function middleware();
+    public function getMiddleware();
 
-    public function patterns();
+    public function getPatterns();
 
     public function routes(Router $router);
 }
