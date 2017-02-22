@@ -1,4 +1,4 @@
-# BaseController
+# Controller Helpers
 
 ## Introduction
 The JumpGate BaseController class adds a lot of extra functionality to help with common tasks.  To use it you should have 
