@@ -1,9 +1,15 @@
 # Class Based Routing
 
+- [Introduction](#introduction)
+- [RouteServiceProvider](#service-provider)
+- [Usage](#usage)
+
+<a name="introduction"></a>
 ## Introduction
 Class based routing is an idea to use proper PHP classes for route groups.  Each class used in this way behaves like a route 
 group.
 
+<a name="service-provider"></a>
 ## RouteServiceProvider
 You will first need to make sure your `RouteServiceProvider` can understand these classes.  In `jumpgate/jumpgate` this is 
 done for you.  To set it up manually, you would need something like the following example.
@@ -169,6 +175,7 @@ third one is handling our route classes.
 
 mapRouteClasses loops through each class in the providers array and assigns the routes within as a route group.
 
+<a name="usage"></a>
 ## Usage
 So how does this provider help us?  Let's first look at an example route class.
 

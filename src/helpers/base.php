@@ -35,20 +35,6 @@ if (! function_exists('stop_debug')) {
     }
 }
 
-if (! function_exists('collector')) {
-    /**
-     * Create a collection from the given value.
-     *
-     * @param  mixed $value
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    function collector($value = null)
-    {
-        return new EloquentCollection($value);
-    }
-}
-
 if (! function_exists('pp')) {
     /**
      * Print Pre data.
