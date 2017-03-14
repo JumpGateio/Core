@@ -4,7 +4,7 @@ if (! function_exists('setTime')) {
     function setTime($time)
     {
         if (auth()->check()) {
-            $timezone = is_null(auth()->user()->timezone) ? config('app.default_user_timezone') : auth()->user()->timezone;
+            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
 
             return \Camroncade\Timezone\Facades\Timezone::convertToUTC($time, $timezone);
         }
@@ -19,8 +19,8 @@ if (! function_exists('getTime')) {
         $timeZone = null;
 
         if (auth()->check()) {
-            $timeZone = auth()->user()->timezone;
-            $time     = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timeZone);
+            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
+            $time     = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timezone);
         }
 
         return \Carbon\Carbon::parse($time, $timeZone);
@@ -31,7 +31,8 @@ if (! function_exists('carbonParse')) {
     function carbonParse($date)
     {
         if (auth()->check()) {
-            return \Carbon\Carbon::parse($date)->setTimezone(auth()->user()->timezone);
+            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
+            return \Carbon\Carbon::parse($date)->setTimezone($timezone);
         }
 
         return \Carbon\Carbon::parse($date);

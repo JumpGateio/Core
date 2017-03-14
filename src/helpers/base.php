@@ -1,7 +1,5 @@
 <?php
 
-use JumpGate\Database\Collections\EloquentCollection;
-
 if (! function_exists('start_debug')) {
     /**
      * Start a debugbar measurement
