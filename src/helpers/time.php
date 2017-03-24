@@ -3,20 +3,22 @@
 if (! function_exists('setTime')) {
     function setTime($time)
     {
+        $timeZone = config('app.timezone');
+
         if (auth()->check()) {
             $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
 
             return \Camroncade\Timezone\Facades\Timezone::convertToUTC($time, $timezone);
         }
 
-        return $time;
+        return \Carbon\Carbon::parse($time, $timeZone);
     }
 }
 
 if (! function_exists('getTime')) {
     function getTime($time)
     {
-        $timeZone = null;
+        $timeZone = config('app.timezone');
 
         if (auth()->check()) {
             $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
