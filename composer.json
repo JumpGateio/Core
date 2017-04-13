@@ -45,8 +45,8 @@
     "minimum-stability": "stable",
     "repositories": [
         {
-            "type": "path",
-            "url": "../Database"
+            "type": "vcs",
+            "url": "git@github.com:JumpGateio/Database.git"
         }
     ]
 }
