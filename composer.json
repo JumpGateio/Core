@@ -42,11 +42,5 @@
             "JumpGate\\Core\\": "src/JumpGate/Core"
         }
     },
-    "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:JumpGateio/Database.git"
-        }
-    ]
+    "minimum-stability": "stable"
 }
