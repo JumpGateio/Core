@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers;
+namespace JumpGate\Core\Abstracts;
 
 abstract class Transformer
 {
