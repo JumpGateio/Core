@@ -38,6 +38,16 @@ abstract class BaseRoute
     public $patterns = [];
 
     /**
+     * @var string|null
+     */
+    public $role = null;
+
+    /**
+     * @var array
+     */
+    public $permissions = [];
+
+    /**
      * Add a context to the array.
      *
      * @param string $name
@@ -128,5 +138,29 @@ abstract class BaseRoute
         }
 
         return $this->patterns;
+    }
+
+    /**
+     * Get the roles required for this route group.
+     *
+     * @return array|null
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Get the roles required for this route group.
+     *
+     * @return array|null
+     */
+    public function getPermissions()
+    {
+        if (! is_array($this->permissions)) {
+            return null;
+        }
+
+        return implode(', ', $this->permissions);
     }
 }
