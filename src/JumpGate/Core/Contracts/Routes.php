@@ -18,5 +18,9 @@ interface Routes
 
     public function getPatterns();
 
+    public function getRole();
+
+    public function getPermissions();
+
     public function routes(Router $router);
 }
