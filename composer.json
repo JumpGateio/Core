@@ -44,5 +44,12 @@
             "JumpGate\\Core\\": "src/JumpGate/Core"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Camroncade\\Timezone\\TimezoneServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable"
 }
