@@ -14,6 +14,7 @@
     ],
     "require": {
         "laravel/framework": "^5.0",
+        "jumpgate/database": "~1.0",
         "laracasts/utilities": "~3.0",
         "camroncade/timezone": "^0.1.0"
     },
