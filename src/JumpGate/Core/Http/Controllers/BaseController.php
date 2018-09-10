@@ -9,6 +9,7 @@ abstract class BaseController extends Controller
 {
     protected $layoutOptions = [
         'default' => 'layouts.default',
+        'sidebar' => 'layouts.sidebar',
         'ajax'    => 'layouts.ajax',
     ];
 

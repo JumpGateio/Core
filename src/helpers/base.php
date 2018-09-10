@@ -74,3 +74,32 @@ if (! function_exists('ppd')) {
         die;
     }
 }
+
+if (!function_exists('objToArray')) {
+    /**
+     * Convert an object into an array.
+     *
+     * @param $object
+     *
+     * @return array
+     */
+    function objToArray($object)
+    {
+        $array = [];
+        foreach ($object as $key => $value) {
+            $key = snake_case($key);
+
+            if (!is_object($value)) {
+                $array[$key] = $value;
+                continue;
+            }
+
+            foreach ($value as $valueKey => $valueValue) {
+                $valueKey         = $key . '_' . $valueKey;
+                $array[$valueKey] = $valueValue;
+            }
+        }
+
+        return $array;
+    }
+}

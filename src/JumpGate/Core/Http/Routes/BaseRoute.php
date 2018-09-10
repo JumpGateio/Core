@@ -53,7 +53,7 @@ abstract class BaseRoute
      * @param string $name
      * @param string $uri
      *
-     * @return \JumpGate\Core\Http\Routes\Routes
+     * @return \JumpGate\Core\Http\Routes\BaseRoute
      */
     public function setContext($name, $uri)
     {
