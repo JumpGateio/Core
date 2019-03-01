@@ -1,12 +1,26 @@
 <?php
 
+if (! function_exists('getTimezone')) {
+    function getTimezone()
+    {
+        $details  = auth()->user()->details ?? null;
+        $timezone = config('app.timezone');
+
+        if (! is_null($details) && ! is_null($details->timezone)) {
+            $timezone = $details->timezone;
+        }
+
+        return $timezone;
+    }
+}
+
 if (! function_exists('setTime')) {
     function setTime($time)
     {
         $timeZone = config('app.timezone');
 
         if (auth()->check()) {
-            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
+            $timezone = getTimezone();
 
             return \Camroncade\Timezone\Facades\Timezone::convertToUTC($time, $timezone);
         }
@@ -21,7 +35,8 @@ if (! function_exists('getTime')) {
         $timeZone = config('app.timezone');
 
         if (auth()->check()) {
-            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
+            $timezone = getTimezone();
+
             $time     = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timezone);
         }
 
@@ -33,7 +48,8 @@ if (! function_exists('carbonParse')) {
     function carbonParse($date)
     {
         if (auth()->check()) {
-            $timezone = is_null(auth()->user()->details->timezone) ? config('app.timezone') : auth()->user()->details->timezone;
+            $timezone = getTimezone();
+
             return \Carbon\Carbon::parse($date)->setTimezone($timezone);
         }
 
@@ -102,8 +118,8 @@ if (! function_exists('convertFromSeconds')) {
 
         foreach ($units as $name => $divisor) {
             if ($quot = intval($time / $divisor)) {
-                $num = sprintf('%02s', $quot);
-                $s .= "$num" . ':';
+                $num  = sprintf('%02s', $quot);
+                $s    .= "$num" . ':';
                 $time -= $quot * $divisor;
             }
         }
@@ -112,7 +128,7 @@ if (! function_exists('convertFromSeconds')) {
     }
 }
 
-if (!function_exists('secondsToReadable')) {
+if (! function_exists('secondsToReadable')) {
     /**
      * Take a number of seconds and return it as a readable amount of time.
      *
