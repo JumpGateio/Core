@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "^5.0",
-        "jumpgate/database": "~1.0",
+        "laravel/framework": "^6.0",
+        "jumpgate/database": "~2.0",
         "laracasts/utilities": "~3.0",
         "camroncade/timezone": "^0.1.0"
     },
