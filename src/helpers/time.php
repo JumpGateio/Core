@@ -17,30 +17,30 @@ if (! function_exists('getTimezone')) {
 if (! function_exists('setTime')) {
     function setTime($time)
     {
-        $timeZone = config('app.timezone');
-
         if (auth()->check()) {
             $timezone = getTimezone();
 
             return \Camroncade\Timezone\Facades\Timezone::convertToUTC($time, $timezone);
         }
+        
+        $timezone = config('app.timezone');
 
-        return \Carbon\Carbon::parse($time, $timeZone);
+        return \Carbon\Carbon::parse($time, $timezone);
     }
 }
 
 if (! function_exists('getTime')) {
     function getTime($time)
     {
-        $timeZone = config('app.timezone');
+        $timezone = config('app.timezone');
 
         if (auth()->check()) {
             $timezone = getTimezone();
 
-            $time     = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timezone);
+            $time = \Camroncade\Timezone\Facades\Timezone::convertFromUTC($time, $timezone);
         }
 
-        return \Carbon\Carbon::parse($time, $timeZone);
+        return \Carbon\Carbon::parse($time, $timezone);
     }
 }
 
