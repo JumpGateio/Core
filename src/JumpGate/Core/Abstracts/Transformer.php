@@ -6,7 +6,7 @@ abstract class Transformer
 {
     public static function transformAll($resources)
     {
-        return collect($resources)->map(function ($resource) {
+        return supportCollector($resources)->map(function ($resource) {
             return get_called_class()::transform($resource);
         });
     }
